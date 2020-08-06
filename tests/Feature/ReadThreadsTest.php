@@ -14,7 +14,7 @@ class ThreadsTest extends TestCase
 
         parent::setUp();
 
-        $this->thread = factory('App\Thread')->create();
+        $this->thread = create('App\Thread');
     }
 
     /**
@@ -35,8 +35,8 @@ class ThreadsTest extends TestCase
      */
     public function test_a_user_can_read_a_single_thread()
     {
-        $response = $this->get('/threads/' .  $this->thread->id);
-        $response->assertSee($this->thread->title);
+        $this->get($this->thread->path())
+            ->assertSee($this->thread->title);
     }
 
 
@@ -48,7 +48,7 @@ class ThreadsTest extends TestCase
 
         $reply = factory('App\Reply')->create(['thread_id' => $this->thread->id]);
 
-        $this->get('/threads/' .  $this->thread->id)
+        $this->get($this->thread->path())
             ->assertSee($reply->body);
     }
 }
