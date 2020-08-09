@@ -20,6 +20,13 @@ class ThreadTest extends TestCase
         $this->thread = create('App\Thread');
     }
 
+    public function test_a_thread_can_make_a_string_path()
+    {
+        $thread = create('App\Thread');
+
+        $this->assertEquals(url('/threads') . '/' . $thread->channel->slug . '/' . $thread->id, $thread->path());
+    }
+
     /**
      * A basic unit test example.
      *
@@ -53,5 +60,11 @@ class ThreadTest extends TestCase
         ]);
 
         $this->assertCount(1, $this->thread->replies);
+    }
+
+    public function test_a_thread_belongs_to_a_channel()
+    {
+        $thread = create('App\Thread');
+        $this->assertInstanceOf('App\Channel', $thread->channel);
     }
 }

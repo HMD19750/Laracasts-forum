@@ -10,11 +10,18 @@ class CreateThreadsTest extends TestCase
     use DatabaseMigrations;
 
 
-    // public function test_guests_may_not_create_threads()
-    //  {
-    //     $thread = factory('App\Thread')->make();
-    //     $this->post('/threads', $thread->toArray());
-    //  }
+    public function test_guests_may_not_create_threads()
+    {
+        $this->post('/threads')
+            ->assertRedirect('/login');
+    }
+
+    public function test_guests_cannot_see_the_create_thread_page()
+    {
+        $this->get('/threads/create')
+            ->assertRedirect('/login');
+    }
+
 
     /**
      * A basic feature test example.
@@ -27,7 +34,7 @@ class CreateThreadsTest extends TestCase
         $this->signIn();
 
         // When we hit the endpoint to create a new thread
-        $thread = make('App\Thread');
+        $thread = create('App\Thread');
         $this->post('/threads', $thread->toArray());
 
         // Then when we visit the threads page
