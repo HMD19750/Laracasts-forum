@@ -38,7 +38,22 @@
 
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li><a href="{{ url('/threads') }}">All threads</a>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle ml-4" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">
+                                Browse <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li class="ml-2"><a href="{{ url('/threads') }}">All threads</a></li>
+
+                                @if (auth()->check())
+                                <li class="ml-2"><a href="{{ url('/threads') }}?by={{ auth()->user()->name }}">My Threads</a></li>
+                                @endif
+                                
+                            </ul>
+                        </li>
 
                         <li><a href="{{ url('/threads/create') }}" class="ml-4">New Thread</a></li>
 
@@ -48,7 +63,7 @@
                                 Channels <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                @foreach (App\Channel::all() as $channel)
+                                @foreach ($channels as $channel)
                                 <li><a href="{{ url('/threads')}}/{{ $channel->slug }}" class="ml-2">
                                         {{ $channel->name }}
                                     </a>

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Channel;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Builder::defaultStringLength(191);
+
+        \View::composer('*', function ($view) {
+            $view->with('channels', \App\Channel::all());
+        });
     }
 }

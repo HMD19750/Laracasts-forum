@@ -16,8 +16,8 @@
                             <select name="channel_id" id="channel_id" class="form-control" required>
 
                                 <option value=""> Choose one...</option>
-
-                                @foreach(App\Channel::all() as $channel)
+                            {{--Channels wordt al gefilterd via composer in AppServiceprovider --}}
+                                @foreach($channels as $channel)
                                     <option value="{{ $channel->id }}" {{ old('channel_id')==$channel->id ?'selected' : '' }}>
                                             {{ $channel->name }}
                                     </option>
