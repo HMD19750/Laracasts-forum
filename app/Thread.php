@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
-
     protected $guarded = [];
 
     /**
@@ -14,7 +13,6 @@ class Thread extends Model
      */
     public function path()
     {
-
         return url('/threads') . '/' . $this->channel->slug . '/' . $this->id;
     }
 
@@ -25,7 +23,6 @@ class Thread extends Model
 
     public function creator()
     {
-
         return $this->belongsTo(User::class, 'user_id');
     }
 
@@ -37,5 +34,10 @@ class Thread extends Model
     public function addReply($reply)
     {
         $this->replies()->create($reply);
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
     }
 }
