@@ -7,7 +7,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <a href="#">
+                    <a href="{{ url('/profiles')}}/{{ $thread->creator->name }} ">
                         {{ $thread->creator->name }}
                     </a>
                     posted: {{ $thread->title }}
