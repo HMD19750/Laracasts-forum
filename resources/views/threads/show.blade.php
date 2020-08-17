@@ -7,10 +7,25 @@
 
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ url('/profiles')}}/{{ $thread->creator->name }} ">
-                        {{ $thread->creator->name }}
-                    </a>
-                    posted: {{ $thread->title }}
+                    <div class="level">
+
+                        <span class="flex">
+                            <a href="{{ url('/profiles')}}/{{ $thread->creator->name }} ">
+                                {{ $thread->creator->name }}
+                            </a>
+                            posted: {{ $thread->title }}
+                        </span>
+
+                        @can('update',$thread)
+                        <form action="{{ $thread->path() }}" method="POST">
+                            @csrf
+                            @method("DELETE")
+
+                            <button type="submit" class="btn btn-link">Delete Thread</button>
+                        </form>
+                        @endcan
+
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -19,7 +34,7 @@
             </div>
 
             @foreach($replies as $reply)
-                @include('threads.reply')
+            @include('threads.reply')
             @endforeach
 
             {{ $replies->links() }}

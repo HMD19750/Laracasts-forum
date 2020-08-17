@@ -76,4 +76,59 @@ class CreateThreadsTest extends TestCase
 
         return $this->post('/threads', $thread->toArray());
     }
+
+    //  public function test_a_thread_can_be_deleted()
+    //  {
+    //      $this->signIn();
+
+    //      $thread = create('App\Thread');
+    //      $reply = create('App\Reply', ['thread_id' => $thread->id]);
+
+    //      $response = $this->json('DELETE', $thread->path());
+
+    //      $response->assertStatus(204);
+
+    //      $this->assertDatabaseMissing('threads', ['id' => $thread->id]);
+    //      $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
+    //  }
+
+    public function test_authorized_users_can_delete_threads()
+    {
+        $this->signIn();
+
+        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+        $reply = create('App\Reply', ['thread_id' => $thread->id]);
+
+        $response = $this->json('DELETE', $thread->path());
+
+        $response->assertStatus(204);
+
+        $this->assertDatabaseMissing('threads', ['id' => $thread->id]);
+        $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
+    }
+
+    public function test_unauthorized_users_cannot_delete_threads()
+    {
+        $thread = create('App\Thread');
+
+        $response = $this->json('DELETE', $thread->path());
+
+        //  $response->assertRedirect('/login');
+
+        $response->assertStatus(401);
+
+        $this->signIn();
+        $response = $this->json('DELETE', $thread->path());
+        $response->assertStatus(403);
+    }
+
+
+    public function test_guests_cannot_delete_threads()
+    {
+
+        $thread = create('App\Thread');
+
+        $this->delete($thread->path())
+            ->assertRedirect('/login');
+    }
 }
