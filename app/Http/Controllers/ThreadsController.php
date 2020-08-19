@@ -124,7 +124,7 @@ class ThreadsController extends Controller
         //    return redirect('login');
         //}
         $this->authorize('update', $thread);
-        $thread->replies()->delete();
+
         $thread->delete();
         if (request()->wantsJson()) {
             return response([], 204);
