@@ -14,6 +14,12 @@
                 });
                 this.editing = false;
                 flash('Updated!');
+            },
+            destroy() {
+                axios.delete('/forum/public/replies/' + this.attributes.id);
+                $(this.$el).fadeOut(500, () => {
+                    flash('Your reply has been deleted.');
+                });
             }
         }
     }

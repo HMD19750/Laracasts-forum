@@ -45,12 +45,8 @@
         <div clas="card-footer">
             <div class="btn-group" role="group">
                 <button class="btn btn-sm btn-info mr-1" @click='editing=true'>Edit </button>
+                <button class="btn btn-sm btn-danger mr-1" @click='destroy'>Delete </button>
 
-                <form method="POST" action="{{ url('/replies') }}/{{ $reply->id }}">
-                    @csrf
-                    @method("DELETE")
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                </form>
             </div>
         </div>
         @endcan
