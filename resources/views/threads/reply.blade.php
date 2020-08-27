@@ -15,12 +15,7 @@
                 </h5>
 
                 <div>
-                    <form method="POST" Action="{{url('replies')}}/{{ $reply->id }}/favorites">
-                        @csrf
-                        <button type='submit' class='btn btn-link' {{ $reply->isFavorited()? 'disabled' : '' }}>
-                            {{ $reply->favorites_count }} {{ Str::plural('Favorite',$reply->favorites_count ) }}
-                        </button>
-                    </form>
+                    <favorite :reply="{{ $reply }}"></favorite>
                 </div>
             </div>
 
