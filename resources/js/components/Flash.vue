@@ -1,14 +1,16 @@
 <template>
-<div class="alert alert-success alert-flash" role="alert" v-show="show">
-    <strong> Success </strong>{{ body }}
 
-</div>
+    <div class="alert alert-success alert-flash" role="alert" v-show="show">
+        <strong> Success </strong>{{ body }}
+    </div>
 
 </template>
+
 
 <script>
     export default {
         props: ['message'],
+
     data() {
         return {
             body: '',
@@ -49,7 +51,7 @@
 .alert-flash {
     position: fixed;
     right: 25px;
-    bottom: 250x;
+    bottom: 50x;
 }
 
 </style>

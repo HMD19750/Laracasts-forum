@@ -12,40 +12,40 @@ export default {
   data() {
     return {
       favoritesCount: this.reply.favoritesCount,
-      isFavorited: this.reply.isFavorited
-    }
+      isFavorited: this.reply.isFavorited,
+    };
   },
 
   computed: {
-      classes() {
-          return ['btn', this.isFavorited ? 'btn-primary' : 'btn-outline-primary'];
-      },
+    classes() {
+      return ["btn", this.isFavorited ? "btn-primary" : "btn-outline-primary"];
+    },
 
-      endpoint() {
-          return "/forum/public/replies/" + this.reply.id + "/favorites";
-      }
+    endpoint() {
+      return "/forum/public/replies/" + this.reply.id + "/favorites";
+    },
   },
 
   methods: {
     toggle() {
       if (this.isFavorited) {
-          this.destroy();
+        this.destroy();
       } else {
-          this.create();
+        this.create();
       }
     },
 
     create() {
-        axios.post(this.endpoint);
-        this.isFavorited=true;
-        this.favoritesCount++;
+      axios.post(this.endpoint);
+      this.isFavorited = true;
+      this.favoritesCount++;
     },
 
     destroy() {
-        axios.delete(this.endpoint);
-        this.isFavorited=false;
-        this.favoritesCount--;
-    }
+      axios.delete(this.endpoint);
+      this.isFavorited = false;
+      this.favoritesCount--;
+    },
   },
 };
 </script>

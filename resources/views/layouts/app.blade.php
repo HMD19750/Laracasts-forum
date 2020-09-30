@@ -16,9 +16,19 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        window.App={!! json_encode([
+            'csrfToken'=>csrf_token(),
+            'user'=>Auth::user(),
+            'signedIn'=>Auth::check()
+        ]) !!};
+    </script>
+
     <style>
         body {
             padding-bottom: 100px;
