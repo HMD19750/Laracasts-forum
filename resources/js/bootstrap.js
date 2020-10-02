@@ -30,7 +30,10 @@ Vue.prototype.authorize = function(handler) {
 
 window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-CSRF-TOKEN': window.App.csrfToken
+};
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
