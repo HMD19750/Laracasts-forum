@@ -29,6 +29,7 @@
 
                         <li class="ml-2"><a href="{{ url('/threads') }}?popular=1">Popular threads</a></li>
 
+                        <li class="ml-2"><a href="{{ url('/threads') }}?unanswered=1">Unanswered threads</a></li>
                     </ul>
                 </li>
 
