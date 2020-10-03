@@ -57,7 +57,7 @@
                 this.dataSet=data;
                 this.items=data.data;
 
-                windwo.scrollTo(0,0);
+                window.scrollTo(0,0);
             },
 
         },

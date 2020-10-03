@@ -32,7 +32,7 @@
         flash(message) {
             this.body=message;
             this.show=true;
-console.log('Flash hit');
+console.log('Flash hit: ' + message);
             this.hide();
         },
 
